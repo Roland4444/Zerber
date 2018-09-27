@@ -1,3 +1,5 @@
+import java.io.PrintWriter
+
 import org.apache.commons.compress.utils.Lists
 import org.json.JSONObject
 import org.json4s._
@@ -34,6 +36,15 @@ object JS{
     JS1.put("", JArr)
     println((JS1.toString))
     println((JArr))
+
+    val doc = render(JArr)
+    val compactJson = compact(doc)
+    val prettyJson = pretty(doc)
+    println(s"compact:\n$compactJson\n\npretty:\n$prettyJson")
+    val pr = new PrintWriter("out")
+    pr.write(compactJson)
+    pr.close
+
   }
 
 }
