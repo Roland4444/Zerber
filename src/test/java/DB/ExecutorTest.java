@@ -1,11 +1,16 @@
 package DB;
+
 import org.junit.Test;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.*;
 public class ExecutorTest {
-    zerber.co.uk.Executor exec = new zerber.co.uk.Executor("192.0.0.14", "ODAY", "roman", "00000", true);
+    zerber.co.uk.Executor exec = new zerber.co.uk.Executor("192.0.0.14", "ODAY", "roman", "rtm37dex", true);
 
     public ExecutorTest() throws SQLException {
     }

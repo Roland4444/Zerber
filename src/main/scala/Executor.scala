@@ -13,4 +13,3 @@ class Executor(ip: String, db: String, login: String, passwd: String, Usejtds: B
     res
   }
 }
-

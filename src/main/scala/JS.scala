@@ -46,4 +46,8 @@ class JS{
     pr.close
   }
 
+  def appendArrayToArray( input: String,  appended: String)={
+    compact(render(parse(input) ++ parse(appended)))
+  }
+
 }
