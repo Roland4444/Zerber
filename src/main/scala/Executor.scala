@@ -8,8 +8,6 @@ class Executor(ip: String, db: String, login: String, passwd: String, Usejtds: B
   val conn = getConnection(cnnct)
 
   def submit(query: String): ResultSet = {
-    val stmt = conn.createStatement
-    val res = stmt.executeQuery(query)
-    res
+    conn.createStatement.executeQuery(query)
   }
 }
