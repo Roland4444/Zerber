@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+var btn = document.getElementById('request');
+var info = document.getElementById('info');
+
+var request = new XMLHttpRequest();
+
+request.onreadystatechange = function() {
+  if(request.readyState === 4) {
+    info.style.border = '1px solid #e8e8e8';
+    if(request.status === 200) {
+      info.innerHTML = request.responseText;
+    } else {
+      bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+    }
+  }
+}
+
+request.open('/test', '');
+
+btn.addEventListener('click', function() {
+  this.style.display = 'none';
+  request.send();
+});
+
+
+    function send(){
+        alert("pressed")
+    }
+</script>
+<body>
+<div>
+    <input type="text" id="req">
+    <button id="request" >Make Request</button>
+    <div id="info"></div>
+</div>
+</body>
+</html>
