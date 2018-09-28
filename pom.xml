@@ -10,6 +10,12 @@
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
         <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.12</artifactId>
+            <version>3.0.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-jackson_2.12</artifactId>
             <version>3.6.1</version>
@@ -60,12 +66,7 @@
             <artifactId>selenide</artifactId>
             <version>4.14.1</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+
 
 
     </dependencies>
@@ -81,13 +82,16 @@
             </plugin>
 
             <plugin>
+
               <groupId>org.scalatest</groupId>
               <artifactId>scalatest-maven-plugin</artifactId>
               <version>1.0</version>
               <configuration>
                 <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 <junitxml>.</junitxml>
-                <filereports>WDF TestSuite.txt</filereports>
+                <filereports>WDFTestSuite.txt</filereports>
+                  <skipTests>false</skipTests>
+
               </configuration>
               <executions>
                 <execution>
@@ -98,81 +102,81 @@
                 </execution>
               </executions>
             </plugin>
-                        <plugin>
-                            <groupId>net.alchim31.maven</groupId>
-                            <artifactId>scala-maven-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <id>scala-compile-first</id>
-                                    <phase>process-resources</phase>
-                                    <goals>
-                                        <goal>add-source</goal>
-                                        <goal>compile</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-compiler-plugin</artifactId>
-                            <configuration>
-                                <source>1.8</source>
-                                <target>1.8</target>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <phase>compile</phase>
-                                    <goals>
-                                        <goal>compile</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-                        <plugin>
-                            <artifactId>maven-assembly-plugin</artifactId>
-                            <version>2.5.3</version>
-                            <configuration>
-                                <descriptorRefs>
-                                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                                </descriptorRefs>
-                                <archive>
-                                    <manifest>
-                                        <mainClass>NettyLauncher</mainClass>
-                                    </manifest>
-                                </archive>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>single</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
+                                    <plugin>
+                                        <groupId>net.alchim31.maven</groupId>
+                                        <artifactId>scala-maven-plugin</artifactId>
+                                        <executions>
+                                            <execution>
+                                                <id>scala-compile-first</id>
+                                                <phase>process-resources</phase>
+                                                <goals>
+                                                    <goal>add-source</goal>
+                                                    <goal>compile</goal>
+                                                </goals>
+                                            </execution>
+                                        </executions>
+                                    </plugin>
+                                    <plugin>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-compiler-plugin</artifactId>
+                                        <configuration>
+                                            <source>1.8</source>
+                                            <target>1.8</target>
+                                        </configuration>
+                                        <executions>
+                                            <execution>
+                                                <phase>compile</phase>
+                                                <goals>
+                                                    <goal>compile</goal>
+                                                </goals>
+                                            </execution>
+                                        </executions>
+                                    </plugin>
+                                    <plugin>
+                                        <artifactId>maven-assembly-plugin</artifactId>
+                                        <version>2.5.3</version>
+                                        <configuration>
+                                            <descriptorRefs>
+                                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                                            </descriptorRefs>
+                                            <archive>
+                                                <manifest>
+                                                    <mainClass>NettyLauncher</mainClass>
+                                                </manifest>
+                                            </archive>
+                                        </configuration>
+                                        <executions>
+                                            <execution>
+                                                <phase>package</phase>
+                                                <goals>
+                                                    <goal>single</goal>
+                                                </goals>
+                                            </execution>
+                                        </executions>
+                                    </plugin>
 
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-shade-plugin</artifactId>
-                            <version>2.4.3</version>
-                            <executions>
-                                <execution>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>shade</goal>
-                                    </goals>
-                                    <configuration>
-                                        <transformers>
-                                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                                <mainClass>hg</mainClass>
-                                            </transformer>
-                                        </transformers>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-                    </plugins>
-                </build>
+                                    <plugin>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-shade-plugin</artifactId>
+                                        <version>2.4.3</version>
+                                        <executions>
+                                            <execution>
+                                                <phase>package</phase>
+                                                <goals>
+                                                    <goal>shade</goal>
+                                                </goals>
+                                                <configuration>
+                                                    <transformers>
+                                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                                            <mainClass>hg</mainClass>
+                                                        </transformer>
+                                                    </transformers>
+                                                </configuration>
+                                            </execution>
+                                        </executions>
+                                    </plugin>
+                                </plugins>
+                            </build>
 
 
-            </project>
+                        </project>

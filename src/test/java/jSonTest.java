@@ -16,7 +16,7 @@ class jSonTest {
         input.put("1", "7777");
         JSONObject jsO = new JSONObject();
         jsO.append("0", "555");
-        jsO.append("1", "7777");
+        jsO.append("1", "77212177");
         assertEquals(jsO.toString(), js.getJSonfromMap(input).toString());
 
 

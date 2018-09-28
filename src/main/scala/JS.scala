@@ -5,7 +5,7 @@ import org.json.JSONObject
 import org.json4s._
 import org.json4s.JsonDSL._
 import org.json4s.jackson.JsonMethods._
-object JS{
+class JS{
   def main(args: Array[String]) {
     val JSONString = """
       {
@@ -44,7 +44,6 @@ object JS{
     val pr = new PrintWriter("out")
     pr.write(compactJson)
     pr.close
-
   }
 
 }
