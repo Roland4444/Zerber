@@ -1,43 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<script>
-var btn = document.getElementById('request');
-var info = document.getElementById('info');
 
-var request = new XMLHttpRequest();
+    <script>
+   function send(){
+        function getXmlHttp(){
+            var xmlhttp
+            try{xmlhttp= new ActiveXObject("Msxml2.XMLHTTP");
+                } catch(e){
+                     try{xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");} catch (e){xmlhttp = false}
+            }
+            if (!xmlhttp && typeof XMLHttpRequest!='undefined') xmlhttp = new XMLHttpRequest()
+            return xmlhttp
+        }
+        var xhr =  new XMLHttpRequest();
+        var request = "/aj"
+        xhr.open("POST", request, true)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange=function(){
+        if (xhr.readyState != 4) return clearTimeout(xhrTimeout)
+        if (xhr.status == 200)  alert("response      "+xhr.responseText)
+        }
+        xhr.send("name=12")
+        var xhrTimeout = setTimeout( function(){ xhr.abort(); handleError("Timeout") }, 10000);
 
-request.onreadystatechange = function() {
-  if(request.readyState === 4) {
-    info.style.border = '1px solid #e8e8e8';
-    if(request.status === 200) {
-      info.innerHTML = request.responseText;
-    } else {
-      bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+        function handleError(message) {
+              alert("Ошибка: "+message)
     }
-  }
 }
+    </script>
+</head>
 
-request.open('/test', '');
-
-btn.addEventListener('click', function() {
-  this.style.display = 'none';
-  request.send();
-});
-
-
-    function send(){
-        alert("pressed")
-    }
-</script>
 <body>
-<div>
-    <input type="text" id="req">
-    <button id="request" >Make Request</button>
-    <div id="info"></div>
-</div>
+<button onclick="send()">Click me</button>
+
+
 </body>
 </html>
