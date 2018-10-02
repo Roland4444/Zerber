@@ -3,27 +3,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <script>
    function send(){
-        function getXmlHttp(){
-            var xmlhttp
-            try{xmlhttp= new ActiveXObject("Msxml2.XMLHTTP");
-                } catch(e){
-                     try{xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");} catch (e){xmlhttp = false}
-            }
-            if (!xmlhttp && typeof XMLHttpRequest!='undefined') xmlhttp = new XMLHttpRequest()
-            return xmlhttp
-        }
+        var query = document.getElementById('input').value
+        var result = document.getElementById("result")
         var xhr =  new XMLHttpRequest();
-        var request = "/aj"
+        var request = "/submit"
         xhr.open("POST", request, true)
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange=function(){
         if (xhr.readyState != 4) return clearTimeout(xhrTimeout)
-        if (xhr.status == 200)  alert("response      "+xhr.responseText)
+        if (xhr.status == 200)  result.innerText=xhr.responseText
         }
-        xhr.send("name=12")
+        alert("QQ==>"+query)
+        xhr.send("query="+query)
         var xhrTimeout = setTimeout( function(){ xhr.abort(); handleError("Timeout") }, 10000);
 
         function handleError(message) {
@@ -35,7 +32,10 @@
 
 <body>
 <button onclick="send()">Click me</button>
-
+<input type="text" id="input">
+<div id="result">
+    <h1></h1>
+</div>
 
 </body>
 </html>

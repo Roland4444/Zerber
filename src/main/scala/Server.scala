@@ -8,26 +8,29 @@ object Server{
   val loadIndex: Handler = new Handler {override def handle(context: Context) ={context.render("index.html")      }}
 
   val postHandler: Handler = new Handler {override def handle(context: Context) ={
-    context.req.getParameter("query")
+    val query = context.formParam("query")
     val output = new StringBuffer
-    output.append(JSONSQL.getJSonfromQuery(context.req.getParameter("query")))
+    println(query)
+    output.append(JSONSQL.getJSonfromQuery(query))
+    print(output.toString)
     context.html(output.toString)}
   }
   val testHandler: Handler = new Handler {override def handle(context: Context) ={
-    print( context.req.)
+    print( context.formParam("name"))
 
-    println(context.mapFormParams().size())
-    println(context.mapQueryParams().size())
     context.html("yey")   }}
+
+
 
 
 
   def main(args: Array[String]): Unit = {
     var app: Javalin = Javalin.create.start(7777)
     app.get("/", rootHandler)
-    app.get("/test", testHandler)
-    app.get("/aj", testHandler)
+    app.post("/test", testHandler)
+    app.post("/aj", testHandler)
     app.get("/load", loadIndex)
+    app.post("/submit", postHandler)
 
 
   }
