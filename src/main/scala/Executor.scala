@@ -7,11 +7,9 @@ class Executor(ip: String, db: String, login: String, passwd: String, Usejtds: B
   if (Usejtds)
     cnnct = "jdbc:jtds:sqlserver://" + ip + ":1433/" + db + ";instance=MSSQLSERVER;user=" + login + ";password=" + passwd
   val conn = getConnection(cnnct)
-
   def submit(query: String): ResultSet = {
     conn.createStatement.executeQuery(query)
   }
-
   def columnsName(query:String): util.ArrayList[String]={
     val meta = submit(query).getMetaData
     var res = new util.ArrayList[String]

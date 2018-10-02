@@ -20,7 +20,7 @@
         if (xhr.readyState != 4) return clearTimeout(xhrTimeout)
         if (xhr.status == 200)  result.innerText=xhr.responseText
         }
-       // alert("QQ==>"+query)
+        alert("QQ==>"+query)
         xhr.send("query="+query)
         var xhrTimeout = setTimeout( function(){ xhr.abort(); handleError("Timeout") }, 10000);
 
@@ -33,7 +33,7 @@
 
 <body>
 <button onclick="send()">Click me</button>
-<input type="text" id="input">
+<input type="text" id="input" style ="width:50%;">
 <div id="result">
     <h1></h1>
 </div>

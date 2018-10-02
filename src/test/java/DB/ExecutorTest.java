@@ -14,7 +14,7 @@ public class ExecutorTest {
 
     @Test
     public void insert() throws SQLException {
-        ResultSet result =  exec.submit("select * from dbo.banks");
+        ResultSet result =  exec.submit("select * from dbo.banks where f_bik like '0412%'");
         ResultSetMetaData rm = result.getMetaData();
         while (result.next()){
             for (int i=1; i<=rm.getColumnCount(); i++)

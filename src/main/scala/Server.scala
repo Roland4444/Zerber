@@ -7,7 +7,6 @@ object Server{
   val websocket: Handler = new Handler {override def handle(context: Context) ={context.render("ws.html")      }}
   val rootHandler: Handler = new Handler {override def handle(context: Context) ={context.render("fake.html")      }}
   val loadIndex: Handler = new Handler {override def handle(context: Context) ={context.render("index.html")      }}
-
   val postHandler: Handler = new Handler {override def handle(context: Context) ={
     val query = context.formParam("query")
     val output = new StringBuffer
@@ -18,13 +17,7 @@ object Server{
   }
   val testHandler: Handler = new Handler {override def handle(context: Context) ={
     print( context.formParam("name"))
-
-    context.html("yey")   }}
-
-
-
-
-
+    context.html(context.formParam("name"))   }}
   def main(args: Array[String]): Unit = {
     var app: Javalin = Javalin.create.start(7777)
     app.get("/", rootHandler)
@@ -42,12 +35,7 @@ object Server{
       ws.onClose((session, statusCode, reason) => System.out.println("Closed"));
       ws.onError((session, throwable) => System.out.println("Errored"));
     });
-
-
   }
-
-
-
 }
 
 
