@@ -4,6 +4,7 @@ import io.javalin.websocket.{ConnectHandler, WsHandler}
 import io.javalin.{Context, Handler, Javalin}
 object Server{
   val JSONSQL: JSONSQL=new JSONSQL
+  val websocket: Handler = new Handler {override def handle(context: Context) ={context.render("ws.html")      }}
   val rootHandler: Handler = new Handler {override def handle(context: Context) ={context.render("fake.html")      }}
   val loadIndex: Handler = new Handler {override def handle(context: Context) ={context.render("index.html")      }}
 
@@ -31,6 +32,16 @@ object Server{
     app.post("/aj", testHandler)
     app.get("/load", loadIndex)
     app.post("/submit", postHandler)
+    app.get("/ws", websocket)
+    app.ws("/ws",  ws => {
+      ws.onConnect(session => System.out.println("Connected"));
+      ws.onMessage((session, message) => {
+        System.out.println("Received: " + message);
+        session.getRemote().sendString(JSONSQL.getJSonfromQuery(message));
+      });
+      ws.onClose((session, statusCode, reason) => System.out.println("Closed"));
+      ws.onError((session, throwable) => System.out.println("Errored"));
+    });
 
 
   }
