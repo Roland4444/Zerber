@@ -8,13 +8,14 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 public class ExecutorTest {
     zerber.co.uk.Executor exec = new zerber.co.uk.Executor("192.0.0.14", "ODAY", "roman", "rtm37dex", true);
+    zerber.co.uk.Executor exec2 = new zerber.co.uk.Executor("192.0.0.14", "RBOOK", "roman", "rtm37dex", true);
 
     public ExecutorTest() throws SQLException {
     }
 
     @Test
     public void insert() throws SQLException {
-        ResultSet result =  exec.submit("select * from dbo.banks where f_bik like '0412%'");
+        ResultSet result =  exec2.submit("select * from dbo.smev3files where f_key = '19';");
         ResultSetMetaData rm = result.getMetaData();
         while (result.next()){
             for (int i=1; i<=rm.getColumnCount(); i++)
